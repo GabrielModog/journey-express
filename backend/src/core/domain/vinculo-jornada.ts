@@ -9,8 +9,8 @@ export enum JornadaStatus {
 
 export interface VinculoJornada {
   id: string;
-  employee: Types.ObjectId;
-  journey: Types.ObjectId;
+  colaborador: Types.ObjectId;
+  jornada: Types.ObjectId;
   startDate: Date;
   status: JornadaStatus;
   currentActionIndex: number;
@@ -22,8 +22,8 @@ export interface VinculoJornada {
 }
 
 const vinculoJornadaSchema = new Schema<VinculoJornada>({
-  employee: { type: Schema.Types.ObjectId, ref: 'Employee', required: true },
-  journey: { type: Schema.Types.ObjectId, ref: 'Journey', required: true },
+  colaborador: { type: Schema.Types.ObjectId, ref: 'Colaborador', required: true },
+  jornada: { type: Schema.Types.ObjectId, ref: 'Jornada', required: true },
   startDate: { type: Date, required: true },
   status: { 
     type: String, 
@@ -38,4 +38,4 @@ const vinculoJornadaSchema = new Schema<VinculoJornada>({
   timestamps: true
 });
 
-export const VinculoJornadaModel = model<VinculoJornada>('JourneyAssignment', vinculoJornadaSchema); 
+export const VinculoJornadaModel = model<VinculoJornada>('JornadaAssignment', vinculoJornadaSchema); 

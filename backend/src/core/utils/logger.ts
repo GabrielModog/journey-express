@@ -8,7 +8,7 @@ const logger = winston.createLogger({
     winston.format.timestamp(),
     winston.format.json()
   ),
-  defaultMeta: { service: 'journey-service' },
+  defaultMeta: { service: 'jornada-service' },
   transports: [
     new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
     new winston.transports.File({ filename: 'logs/combined.log' })
@@ -51,11 +51,11 @@ export const logRedisConnection = (status: 'connected' | 'disconnected' | 'error
   }
 };
 
-export const logActionExecution = (actionId: string, journeyId: string, status: 'started' | 'completed' | 'failed', error?: Error) => {
+export const logActionExecution = (actionId: string, jornadaId: string, status: 'started' | 'completed' | 'failed', error?: Error) => {
   if (status === 'failed' && error) {
-    logger.error(`Action execution ${status}`, { actionId, journeyId, error: error.message });
+    logger.error(`Action execution ${status}`, { actionId, jornadaId, error: error.message });
   } else {
-    logger.info(`Action execution ${status}`, { actionId, journeyId });
+    logger.info(`Action execution ${status}`, { actionId, jornadaId });
   }
 };
 
