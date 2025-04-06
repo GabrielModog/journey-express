@@ -60,11 +60,6 @@ export function ColaboradoresList() {
       <Table.Td>{colaborador.name}</Table.Td>
       <Table.Td>{colaborador.email}</Table.Td>
       <Table.Td>
-        <Badge color={colaborador.isActive ? 'green' : 'red'}>
-          {colaborador.isActive ? 'Ativo' : 'Inativo'}
-        </Badge>
-      </Table.Td>
-      <Table.Td>
         <Group gap="xs" justify="flex-start">
           <Button 
           size="compact-xs"
@@ -115,18 +110,17 @@ export function ColaboradoresList() {
 
   return (
     <>
-      <Group justify="flex-end" mb="md">
+      <Group mb="md">
         <Button onClick={handleCreate} variant="filled">
           Criar Colaborador
         </Button>
       </Group>
 
-      <Table>
+      <Table striped>
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Nome</Table.Th>
             <Table.Th>Email</Table.Th>
-            <Table.Th>Status</Table.Th>
             <Table.Th>Ações</Table.Th>
             <Table.Th>Data de Criação</Table.Th>
           </Table.Tr>

@@ -12,18 +12,32 @@ interface ActionFormProps {
 }
 
 export function ActionForm({ action, opened, onClose }: ActionFormProps) {
-  const { createAction, updateAction } = useActionsStore();
+  const { createAction, updateAction, actions } = useActionsStore();
   const [formData, setFormData] = useState<Partial<Action>>({
-    type: ActionType.VINCULACAO,
+    type: ActionType.EMAIL,
     order: 1,
     delay: 0,
-    config: {},
   });
+
+  const actionsOptions = [
+    {
+      label: "E-mail",
+      value: "EMAIL",
+    },
+    {
+      label: "Whatsapp",
+      value: "WHATSAPP"
+    },
+    {
+      label: "API Call",
+      value: "API_CALL"
+    }
+  ]
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (action) {
-      await updateAction(action.id, formData as Omit<Action, 'id' | 'createdAt' | 'updatedAt'>);
+      await updateAction(action._id, formData as Omit<Action, 'id' | 'createdAt' | 'updatedAt'>);
     } else {
       await createAction(formData as Omit<Action, 'id' | 'createdAt' | 'updatedAt'>);
     }
@@ -41,10 +55,7 @@ export function ActionForm({ action, opened, onClose }: ActionFormProps) {
           <Select
             label="Tipo"
             placeholder="Selecione o tipo de action"
-            data={[
-              { value: ActionType.VINCULACAO, label: 'Vinculação' },
-              { value: ActionType.DESVINCULACAO, label: 'Desvinculação' },
-            ]}
+            data={actionsOptions}
             value={formData.type}
             onChange={(value) => setFormData({ ...formData, type: value as ActionType })}
             required

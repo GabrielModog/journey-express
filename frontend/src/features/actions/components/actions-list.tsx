@@ -61,7 +61,12 @@ export function ActionsList() {
 
   return (
     <>
-      <Table>
+      <Group mb="md">
+        <Button onClick={() => setFormOpened(true)}>
+          Criar ação
+        </Button>
+      </Group>
+      <Table striped>
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Tipo</Table.Th>

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Action } from '@/lib/api/api-client.type';
+import { Action, ActionType } from '@/lib/api/api-client.type';
 import { api } from '@/lib/api/api-client';
 
 interface ActionsState {
@@ -31,7 +31,12 @@ export const useActionsStore = create<ActionsState>((set) => ({
   createAction: async (data: Omit<Action, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
       set({ isLoading: true, error: null });
-      const newAction = await api.post<Action>('/actions', data);
+      const newAction = await api.post<Action>('/actions', {
+        config: data.config ?? {},
+        type: data.type as ActionType,
+        order: data.order,
+        delayMinutes: data.delay
+      });
       set((state: ActionsState) => ({
         actions: [...state.actions, newAction],
         isLoading: false,

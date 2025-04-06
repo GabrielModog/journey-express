@@ -16,7 +16,6 @@ export function ColaboradorForm({ colaborador, opened, onClose }: ColaboradorFor
     name: '',
     email: '',
     phone: '',
-    isActive: true,
   });
 
   useEffect(() => {
@@ -27,7 +26,6 @@ export function ColaboradorForm({ colaborador, opened, onClose }: ColaboradorFor
         name: '',
         email: '',
         phone: '',
-        isActive: true,
       });
     }
   }, [colaborador]);
@@ -70,11 +68,6 @@ export function ColaboradorForm({ colaborador, opened, onClose }: ColaboradorFor
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
             required
-          />
-          <Switch
-            label="Ativo"
-            checked={formData.isActive}
-            onChange={(e) => setFormData({ ...formData, isActive: e.currentTarget.checked })}
           />
           <Group justify="flex-end" mt="md">
             <Button variant="subtle" onClick={onClose}>

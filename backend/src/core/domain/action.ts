@@ -9,7 +9,6 @@ export enum ActionType {
 export interface Action {
   _id: string;
   type: string;
-  config: any;
   order: number;
   delayMinutes: number;
   createdAt: Date;
@@ -21,10 +20,6 @@ export const actionSchema = new Schema<Action>({
     type: String, 
     enum: Object.values(ActionType),
     required: true 
-  },
-  config: {
-    type: Schema.Types.Mixed,
-    required: true
   },
   order: { type: Number, required: true },
   delayMinutes: { type: Number, required: true, default: 0 }

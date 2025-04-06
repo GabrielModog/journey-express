@@ -96,13 +96,13 @@ export function JornadasList() {
 
   return (
     <>
-      <Group p="right" mb="md">
+      <Group mb="md">
         <Button onClick={handleCreate} variant="filled">
           Criar Jornada
         </Button>
       </Group>
 
-      <Table>
+      <Table striped withRowBorders> 
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Nome</Table.Th>

@@ -32,7 +32,10 @@ export const useJornadasStore = create<JornadasState>((set) => ({
   createJornada: async (data: Omit<Jornada, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
       set({ isLoading: true, error: null });
-      const newJornada = await api.post<Jornada>('/jornadas', data);
+      const newJornada = await api.post<Jornada>('/jornadas', {
+        ...data,
+        actions: data.actions.map(a => a._id)
+      });
       set((state: JornadasState) => ({
         jornadas: [...state.jornadas, newJornada],
         isLoading: false,
@@ -47,7 +50,7 @@ export const useJornadasStore = create<JornadasState>((set) => ({
       set({ isLoading: true, error: null });
       const updatedJornada = await api.put<Jornada>(`/jornadas/${id}`, data);
       set((state: JornadasState) => ({
-        jornadas: state.jornadas.map((j) => (j.id === id ? updatedJornada : j)),
+        jornadas: state.jornadas.map((j) => (j._id === id ? updatedJornada : j)),
         isLoading: false,
       }));
     } catch (error) {
@@ -60,7 +63,7 @@ export const useJornadasStore = create<JornadasState>((set) => ({
       set({ isLoading: true, error: null });
       await api.delete(`/jornadas/${id}`);
       set((state: JornadasState) => ({
-        jornadas: state.jornadas.filter((j) => j.id !== id),
+        jornadas: state.jornadas.filter((j) => j._id !== id),
         isLoading: false,
       }));
     } catch (error) {

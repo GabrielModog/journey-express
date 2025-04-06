@@ -1,15 +1,12 @@
 export enum ActionType {
   EMAIL = 'EMAIL',
-  SMS = 'SMS',
+  API_CALL = 'API_CALL',
   WHATSAPP = 'WHATSAPP',
-  VINCULACAO = 'VINCULACAO',
-  DESVINCULACAO = 'DESVINCULACAO',
 }
 
 export interface Action {
   _id: string;
   type: ActionType;
-  config: Record<string, unknown>;
   order: number;
   delay: number;
   createdAt: string;
@@ -30,7 +27,6 @@ export interface Colaborador {
   name: string;
   email: string;
   phone: string;
-  isActive: boolean;
   createdAt: string;
   updatedAt: string;
 }
