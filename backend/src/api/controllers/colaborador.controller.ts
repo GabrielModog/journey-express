@@ -9,9 +9,85 @@ const colaboradorSchema = Joi.object({
   phone: Joi.string().optional()
 });
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Colaborador:
+ *       type: object
+ *       required:
+ *         - name
+ *         - email
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The auto-generated id of the Colaborador
+ *         name:
+ *           type: string
+ *           description: The name of the Colaborador
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: The email of the Colaborador
+ *         department:
+ *           type: string
+ *           description: The department of the Colaborador
+ *         position:
+ *           type: string
+ *           description: The position of the Colaborador
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The creation timestamp
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The last update timestamp
+ */
 export class ColaboradorController {
-  constructor(private colaboradorService: IColaboradorService) {}
+  constructor(private colaboradorService: IColaboradorService) { }
 
+  /**
+   * @swagger
+   * /api/colaboradores:
+   *   post:
+   *     summary: Create a new Colaborador
+   *     tags: [Colaborador]
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             required:
+   *               - name
+   *               - email
+   *             properties:
+   *               name:
+   *                 type: string
+   *                 description: The name of the Colaborador
+   *               email:
+   *                 type: string
+   *                 format: email
+   *                 description: The email of the Colaborador
+   *               department:
+   *                 type: string
+   *                 description: The department of the Colaborador
+   *               position:
+   *                 type: string
+   *                 description: The position of the Colaborador
+   *     responses:
+   *       201:
+   *         description: Colaborador created successfully
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Colaborador'
+   *       400:
+   *         description: Invalid request body
+   *       500:
+   *         description: Server error
+   */
   async create(req: Request, res: Response): Promise<void> {
     try {
       const { error, value } = colaboradorSchema.validate(req.body);
@@ -28,6 +104,31 @@ export class ColaboradorController {
     }
   }
 
+  /**
+   * @swagger
+   * /api/colaboradores/{id}:
+   *   get:
+   *     summary: Get an Colaborador by ID
+   *     tags: [Colaborador]
+   *     parameters:
+   *       - in: path
+   *         name: id
+   *         required: true
+   *         schema:
+   *           type: string
+   *         description: Colaborador ID
+   *     responses:
+   *       200:
+   *         description: Colaborador found
+   *         content:
+   *           application/json:
+   *             schema:
+   *               $ref: '#/components/schemas/Colaborador'
+   *       404:
+   *         description: Colaborador not found
+   *       500:
+   *         description: Server error
+   */
   async getById(req: Request, res: Response): Promise<void> {
     try {
       const colaborador = await this.colaboradorService.getColaboradorById(req.params.id);
@@ -42,6 +143,24 @@ export class ColaboradorController {
     }
   }
 
+  /**
+   * @swagger
+   * /api/colaboradores:
+   *   get:
+   *     summary: Get all Colaboradores
+   *     tags: [Colaborador]
+   *     responses:
+   *       200:
+   *         description: List of Colaboradores
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: array
+   *               items:
+   *                 $ref: '#/components/schemas/Colaborador'
+   *       500:
+   *         description: Server error
+   */
   async getAll(req: Request, res: Response): Promise<void> {
     try {
       const colaboradores = await this.colaboradorService.getAllColaboradores();
