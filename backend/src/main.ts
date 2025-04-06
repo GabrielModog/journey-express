@@ -18,6 +18,7 @@ import { errorHandler } from './api/middlewares/error-handler.middleware';
 import { VinculoJornadaController } from './api/controllers/vincular-jornada.controller';
 import { createVinculoJornadaRoutes } from './api/routes/vinculo-jornada.route';
 import { logDbConnection } from './core/utils/logger';
+import { createSwaggerRoutes } from './api/swagger/swagger.route';
 
 config()
 ensureLogsDirectory()
@@ -61,9 +62,13 @@ app.use("/api/jornadas", createJornadaRoutes(jornadaController))
 app.use("/api/colaboradores", createColaboradorRoutes(colaboradorController))
 app.use("/api/vincular-jornada", createVinculoJornadaRoutes(vinculoJornadaController))
 
+// Configuração de rotas da documentação swagger
+app.use('/api/docs', createSwaggerRoutes());
+
 // Error middleware
 app.use(errorHandler)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
+  console.log(`API Documentation available at http://localhost:${PORT}/api/docs`);
 });
