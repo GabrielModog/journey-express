@@ -1,0 +1,38 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome check src",
+    "format": "biome check --write src"
+  },
+  "dependencies": {
+    "@mantine/core": "^7.17.3",
+    "@mantine/dates": "^7.17.3",
+    "@mantine/form": "^7.17.3",
+    "@mantine/hooks": "^7.17.3",
+    "@mantine/modals": "^7.17.3",
+    "@mantine/notifications": "^7.17.3",
+    "axios": "^1.8.4",
+    "dayjs": "^1.11.13",
+    "next": "15.2.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "postcss": "^8.5.3",
+    "postcss-preset-mantine": "^1.17.0",
+    "postcss-simple-vars": "^7.0.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
