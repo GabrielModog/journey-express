@@ -2,7 +2,10 @@ import '@mantine/core/styles.css';
 
 import React from 'react';
 import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
+
 import { theme } from '@/utils/theme';
+import { AppShellLayout } from '@/components/layout/app-shell';
 
 export const metadata = {
   title: 'Jornadas',
@@ -21,7 +24,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme}>
+          <Notifications />
+          <AppShellLayout>
+            {children}
+          </AppShellLayout>
+        </MantineProvider>
       </body>
     </html>
   );
