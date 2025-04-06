@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ESNext",
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "outDir": "dist",
+    "lib": ["esnext"],
+    "types": ["node"],
+    "baseUrl": "./",
+    "rootDirs": [
+        "./src"
+    ]
+  },
+  "exclude": ["node_modules", "**/*.test.ts", "**/*.spec.ts"],
+  "include": ["src/**/*.ts", "bin/*.ts"],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node",
+  }
+}
