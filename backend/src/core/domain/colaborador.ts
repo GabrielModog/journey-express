@@ -8,7 +8,7 @@ export interface Colaborador {
   updatedAt: Date;
 }
 
-export const employeeSchema = new Schema<Colaborador>({
+export const colaboradorSchema = new Schema<Colaborador>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
 }, {
