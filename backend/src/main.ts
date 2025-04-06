@@ -17,8 +17,10 @@ import { requestLogger } from './api/middlewares/request-logger.middleware';
 import { errorHandler } from './api/middlewares/error-handler.middleware';
 import { VinculoJornadaController } from './api/controllers/vincular-jornada.controller';
 import { createVinculoJornadaRoutes } from './api/routes/vinculo-jornada.route';
-import { logDbConnection } from './core/utils/logger';
+import { logDbConnection, logError } from './core/utils/logger';
 import { createSwaggerRoutes } from './api/swagger/swagger.route';
+import { VinculoJornadaService } from './core/services/vinculo-jornada.service';
+import { ProcessarActionService } from './core/services/processar-action.service';
 
 config()
 ensureLogsDirectory()
@@ -50,6 +52,10 @@ const queue = new Bull("action-queue", {
   }
 })
 
+// Inicialização de services
+const vinculoJornadaService = new VinculoJornadaService(queue)
+const processarActionsService = new ProcessarActionService(vinculoJornadaService)
+
 // Inicialização de controllers
 const actionController = new ActionController(new ActionService())
 const jornadaController = new JornadaController(new JornadaService())
@@ -64,6 +70,21 @@ app.use("/api/vincular-jornada", createVinculoJornadaRoutes(vinculoJornadaContro
 
 // Configuração de rotas da documentação swagger
 app.use('/api/docs', createSwaggerRoutes());
+
+// Processar de actions na queue
+queue.process('execute-action', async (job) => {
+  try {
+    const { assignmentId, actionId, actionType, config } = job.data
+    await processarActionsService.processAction(assignmentId, actionId, actionType, config)
+  } catch (error) {
+    logError(error as Error, { 
+      jobId: job.id, 
+      assignmentId: job.data.assignmentId,
+      actionId: job.data.actionId
+    });
+    throw error
+  }
+})
 
 // Error middleware
 app.use(errorHandler)
