@@ -1,10 +1,11 @@
 import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
 
 import React from 'react';
 import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 
-import { theme } from '@/utils/theme';
+import { theme } from '@/lib/utils/theme';
 import { AppShellLayout } from '@/components/layout/app-shell';
 
 export const metadata = {

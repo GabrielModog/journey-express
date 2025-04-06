@@ -13,6 +13,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   IconHome,
+  IconPlugConnected,
   IconRoute,
   IconSettings,
   IconUsers,
@@ -32,6 +33,7 @@ export function AppShellLayout({ children }: AppShellProps) {
     { label: 'Jornadas', icon: IconRoute, href: '/jornadas' },
     { label: 'Actions', icon: IconSettings, href: '/actions' },
     { label: 'Colaboradores', icon: IconUsers, href: '/colaboradores' },
+    { label: 'Vinculos', icon: IconPlugConnected, href: '/vinculos' },
   ];
 
   return (
@@ -47,7 +49,7 @@ export function AppShellLayout({ children }: AppShellProps) {
       <AppShell.Header>
         <Group h="100%" px="md">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          <Text size="xl" fw={700}>Journey Express</Text>
+          <Text size="xl" fw={700}>Jornadas</Text>
         </Group>
       </AppShell.Header>
 
