@@ -2,6 +2,7 @@ import { config } from 'dotenv';
 import express from "express"
 import Bull from 'bull';
 import mongoose from 'mongoose';
+import cors from "cors"
 
 import { ensureLogsDirectory } from './core/utils/ensure-logs-directory';
 import { createJornadaRoutes } from './api/routes/jornada.routes';
@@ -28,6 +29,7 @@ ensureLogsDirectory()
 const app = express()
 
 // Inicialização de middlewares
+app.use(cors())
 app.use(express.json())
 app.use(requestLogger)
 
