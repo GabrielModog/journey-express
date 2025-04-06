@@ -29,12 +29,8 @@ const colaboradorSchema = Joi.object({
  *           type: string
  *           format: email
  *           description: The email of the Colaborador
- *         department:
- *           type: string
- *           description: The department of the Colaborador
- *         position:
- *           type: string
- *           description: The position of the Colaborador
+ *         phone:
+ *            type: string
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -62,6 +58,7 @@ export class ColaboradorController {
    *             required:
    *               - name
    *               - email
+   *               - phone
    *             properties:
    *               name:
    *                 type: string
@@ -70,12 +67,8 @@ export class ColaboradorController {
    *                 type: string
    *                 format: email
    *                 description: The email of the Colaborador
-   *               department:
+   *               phone:
    *                 type: string
-   *                 description: The department of the Colaborador
-   *               position:
-   *                 type: string
-   *                 description: The position of the Colaborador
    *     responses:
    *       201:
    *         description: Colaborador created successfully

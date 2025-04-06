@@ -20,21 +20,22 @@ const actionSchema = Joi.object({
  *       required:
  *         - name
  *         - type
- *         - config
+ *         - order
+ *         - delayMinute
  *       properties:
  *         _id:
  *           type: string
  *           description: The auto-generated id of the action
- *         name:
- *           type: string
- *           description: The name of the action
  *         type:
  *           type: string
- *           enum: [email, notification, task]
+ *           enum: [EMAIL, WHATSAPP, API_CALL]
  *           description: The type of the action
- *         config:
- *           type: object
- *           description: The configuration for the action
+ *         order:
+ *           type: number
+ *           description: order
+ *         delayMinute:
+ *           type: number
+ *           description: delayMinute
  *         createdAt:
  *           type: string
  *           format: date-time
@@ -62,18 +63,20 @@ export class ActionController {
    *             required:
    *               - name
    *               - type
-   *               - config
+   *               - order
+   *               - delayMinute
    *             properties:
    *               name:
    *                 type: string
    *                 description: The name of the action
    *               type:
    *                 type: string
-   *                 enum: [email, notification, task]
+   *                 enum: [EMAIL, WHATSAPP, API_CALL]
    *                 description: The type of the action
-   *               config:
-   *                 type: object
-   *                 description: The configuration for the action
+   *               order:
+   *                  type: number
+   *               delayMinute:
+   *                  type: number
    *     responses:
    *       201:
    *         description: Action created successfully
