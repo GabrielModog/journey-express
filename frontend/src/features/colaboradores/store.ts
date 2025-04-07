@@ -1,6 +1,7 @@
 'use client';
 
 import { create } from 'zustand';
+import { notifications } from '@mantine/notifications';
 import { api, Colaborador} from '@/lib/api';
 
 interface ColaboradoresState {
@@ -25,6 +26,10 @@ export const useColaboradoresStore = create<ColaboradoresState>((set) => ({
       const response = await api.get<Colaborador[]>('/colaboradores');
       set({ colaboradores: response ?? [], isLoading: false });
     } catch (error) {
+      notifications.show({
+        title: 'ERROR',
+        message: 'Erro ao carregar colaboradores',
+      })
       set({ error: 'Erro ao carregar colaboradores', isLoading: false });
     }
   },
@@ -37,8 +42,16 @@ export const useColaboradoresStore = create<ColaboradoresState>((set) => ({
         colaboradores: [...state.colaboradores, newColaborador],
         isLoading: false,
       }));
+      notifications.show({
+        title: 'SUCESSO',
+        message: 'Colaborador criado com sucesso!',
+      })
     } catch (error) {
       set({ error: 'Erro ao criar colaborador', isLoading: false });
+      notifications.show({
+        title: 'ERROR',
+        message: 'Falha ao criar colaborador.',
+      })
     }
   },
 
@@ -77,8 +90,16 @@ export const useColaboradoresStore = create<ColaboradoresState>((set) => ({
         startDate,
       });
       set({ isLoading: false });
+      notifications.show({
+        title: 'SUCESSO',
+        message: 'Jornada vinculado ao colaborador com sucesso!',
+      })
     } catch (error) {
       set({ error: 'Erro ao vincular jornada', isLoading: false });
+      notifications.show({
+        title: 'ERROR',
+        message: 'Falha ao vincular jornada ao colaborador',
+      })
     }
   },
 })); 
