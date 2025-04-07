@@ -63,7 +63,6 @@ export class VinculoJornadaService {
         assignmentId: assignment.id,
         actionId: currentAction.id,
         actionType: currentAction.type,
-        config: currentAction.config
       },
       {
         delay,
@@ -113,7 +112,7 @@ export class VinculoJornadaService {
     return VinculoJornadaModel.findByIdAndUpdate(id, update, { new: true });
   }
 
-  async addActionToQueue(assignmentId: string, actionId: string, actionType: string, config: any): Promise<void> {
+  async addActionToQueue(assignmentId: string, actionId: string, actionType: string): Promise<void> {
     if (!this.actionQueue) {
       throw new Error('Queue is not initialized');
     }
@@ -122,7 +121,6 @@ export class VinculoJornadaService {
       assignmentId,
       actionId,
       actionType,
-      config
     });
   }
 } 

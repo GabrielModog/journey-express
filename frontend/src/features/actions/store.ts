@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { notifications } from '@mantine/notifications';
+
 import { Action, ActionType } from '@/lib/api/api-client.type';
 import { api } from '@/lib/api/api-client';
 
@@ -32,7 +34,6 @@ export const useActionsStore = create<ActionsState>((set) => ({
     try {
       set({ isLoading: true, error: null });
       const newAction = await api.post<Action>('/actions', {
-        config: data.config ?? {},
         type: data.type as ActionType,
         order: data.order,
         delayMinutes: data.delay
@@ -41,7 +42,15 @@ export const useActionsStore = create<ActionsState>((set) => ({
         actions: [...state.actions, newAction],
         isLoading: false,
       }));
+      notifications.show({
+        title: "SUCESSO",
+        message: "Action criada com sucesso!"
+      })
     } catch (error) {
+      notifications.show({
+        title: "ERROR",
+        message: "Erro ao criar action"
+      })
       set({ error: 'Erro ao criar ação', isLoading: false });
     }
   },

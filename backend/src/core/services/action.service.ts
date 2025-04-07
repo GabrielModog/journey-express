@@ -3,7 +3,7 @@ import { ActionModel } from '../models/action.model';
 import { IActionService } from './interfaces/action-service.interface';
 
 export class ActionService implements IActionService {
-  async createAction(data: { type: string, config: any, order: number, delayMinutes: number }): Promise<Action> {
+  async createAction(data: { type: string, order: number, delayMinutes: number }): Promise<Action> {
     try {
       const action = await ActionModel.create(data);
       return action;

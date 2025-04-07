@@ -71,11 +71,6 @@ http://localhost:3001/api/docs
 ```json
 {
   "type": "EMAIL",
-  "config": {
-    "subject": "Bem-vindo à Eva!",
-    "content": "Olá João, bem-vindo à Eva! Estamos muito felizes em tê-lo conosco. Nesta jornada, você receberá informações importantes sobre sua integração.",
-    "to": "fulano@tal.com"
-  },
   "order": 1,
   "delayMinutes": 0
 }

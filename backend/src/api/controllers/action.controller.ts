@@ -6,7 +6,6 @@ import { IActionService } from '../../core/services/interfaces/action-service.in
 
 const actionSchema = Joi.object({
   type: Joi.string().valid(...Object.values(ActionType)).required(),
-  config: Joi.object().required(),
   order: Joi.number().integer().min(1).required(),
   delayMinutes: Joi.number().integer().min(0).required()
 });
@@ -18,7 +17,6 @@ const actionSchema = Joi.object({
  *     Action:
  *       type: object
  *       required:
- *         - name
  *         - type
  *         - order
  *         - delayMinute
@@ -61,7 +59,6 @@ export class ActionController {
    *           schema:
    *             type: object
    *             required:
-   *               - name
    *               - type
    *               - order
    *               - delayMinute

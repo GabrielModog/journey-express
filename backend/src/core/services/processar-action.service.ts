@@ -11,20 +11,19 @@ export class ProcessarActionService {
     assignmentId: string,
     actionId: string,
     actionType: ActionType,
-    config: any
   ): Promise<void> {
     try {
       logActionExecution(actionId, assignmentId, 'started');
       
       switch (actionType) {
         case ActionType.EMAIL:
-          await this.sendEmail(config);
+          await this.sendEmail();
           break;
         case ActionType.WHATSAPP:
-          await this.sendWhatsAppMessage(config);
+          await this.sendWhatsAppMessage();
           break;
         case ActionType.API_CALL:
-          await this.makeApiCall(config);
+          await this.makeApiCall();
           break;
         default:
           throw new Error(`Unsupported action type: ${actionType}`);
@@ -50,32 +49,20 @@ export class ProcessarActionService {
     }
   }
 
-  private async sendEmail(config: any): Promise<void> {
-    console.log('Sending email:', {
-      to: config.to,
-      subject: config.subject,
-      content: config.content
-    });
+  private async sendEmail(): Promise<void> {
+    console.log('Sending email');
     
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async sendWhatsAppMessage(config: any): Promise<void> {
-    console.log('Sending WhatsApp message:', {
-      to: config.to,
-      content: config.content
-    });
+  private async sendWhatsAppMessage(): Promise<void> {
+    console.log('Sending WhatsApp message:');
     
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
-  private async makeApiCall(config: any): Promise<void> {
-    console.log('Making API call:', {
-      url: config.apiUrl,
-      method: config.method,
-      headers: config.headers,
-      body: config.requestBody
-    });
+  private async makeApiCall(): Promise<void> {
+    console.log('Making API call:');
     
     await new Promise(resolve => setTimeout(resolve, 1000));
   }

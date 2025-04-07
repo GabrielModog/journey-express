@@ -45,11 +45,6 @@ describe('VinculoJornadaService', () => {
           {
             id: actionId,
             type: 'EMAIL',
-            config: {
-              subject: 'Welcome',
-              content: 'Welcome to our company',
-              to: 'john@example.com'
-            },
             order: 1,
             delayMinutes: 0
           }
@@ -90,7 +85,6 @@ describe('VinculoJornadaService', () => {
           actionId,
           assignmentId: mockAssignment.id,
           actionType: 'EMAIL',
-          config: expect.any(Object)
         }),
         expect.any(Object)
       );
@@ -151,21 +145,12 @@ describe('VinculoJornadaService', () => {
           {
             id: actionId,
             type: 'EMAIL',
-            config: {
-              subject: 'Welcome',
-              content: 'Welcome to our company',
-              to: 'john@example.com'
-            },
             order: 1,
             delayMinutes: 0
           },
           {
             id: nextActionId,
             type: 'WHATSAPP',
-            config: {
-              message: 'Welcome to our company',
-              to: '+1234567890'
-            },
             order: 2,
             delayMinutes: 60
           }
@@ -188,7 +173,6 @@ describe('VinculoJornadaService', () => {
           actionId: nextActionId,
           assignmentId,
           actionType: 'WHATSAPP',
-          config: expect.any(Object)
         }),
         expect.any(Object)
       );
@@ -215,11 +199,6 @@ describe('VinculoJornadaService', () => {
           {
             id: actionId,
             type: 'EMAIL',
-            config: {
-              subject: 'Welcome',
-              content: 'Welcome to our company',
-              to: 'john@example.com'
-            },
             order: 1,
             delayMinutes: 0
           }
